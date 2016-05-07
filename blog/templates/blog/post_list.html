@@ -1,21 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>myBlog Site</title>
-</head>
-<body>
-<h1> This is a first blog with Django!</h1>
+{% extends 'blog/base.html' %}
 
-{% for post in posts %}
-    <div>
-        <p>published: {{ post.published_date }}</p>
+{% block bloglst %}
 
-        <p>Created:   {{ post.created_date }}</p>
-        <h1><a href="">{{ post.title }}</a></h1>
-        <p>{{ post.text|linebreaks }}</p>
-    </div>
-{% endfor %}                
 
-<p>It works!</p>
-</body>
-</html>
+            {% for post in posts %}
+                <div class="post">
+                    <div class="date">
+                        <p>published: {{ post.published_date }}</p>
+                    </div>
+                    
+                    <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+
+                    <p>{{ post.text|linebreaks }}</p>
+                </div>
+            {% endfor %}
+
+{% endblock %}            
